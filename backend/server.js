@@ -12,6 +12,7 @@ app.use(express.static('uploads'));
 
 app.use('/api/auth', require('./src/router/auth.routes'));
 app.use('/api/products', require('./src/router/products.routes'));
+app.use('/api/orders', require('./src/router/order.routes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
