@@ -1,22 +1,19 @@
 const db = require('../db/config');
 
-// Obtener usuario por email
 const getUserByEmail = async (email) => {
   const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
   return rows[0];
 };
 
-// Obtener usuario por ID
 const getUserById = async (id) => {
   const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
   return rows[0];
 };
 
-// Crear nuevo usuario
-const createUser = async ({ name, email, password }) => {
+const createUser = async ({ name, email, password, role }) => {
   const [result] = await db.query(
-    'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-    [name, email, password]
+    'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+    [name, email, password, role]
   );
   return result;
 };

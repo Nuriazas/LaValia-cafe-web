@@ -4,7 +4,7 @@ const userService = require('../services/user.service');
 
 const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     const existingUser = await userService.getUserByEmail(email);
     if (existingUser) {
@@ -12,7 +12,7 @@ const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await userService.createUser({ name, email, password: hashedPassword });
+    const newUser = await userService.createUser({ name, email, password: hashedPassword, role: role || 'cliente' });
 
     res.status(201).json({ message: 'Usuario creado', userId: newUser.insertId });
   } catch (error) {
